@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>16 | YYDS</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl@1.1.2/dist/echarts-gl.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <noscript>
+        该浏览器不支持JavaScript，推荐使用电脑端Google Chrome浏览器查看
+    </noscript>
+    <img src="https://cdn.jsdelivr.net/gh/EthanGeekFan/EthanGeekFan.github.io@latest/bg.jpg" alt="" id="background">
+    <div id="main"></div>
+    <div id="infoPane">
+        <p class="m-3 h2" id="location"></p>
+        <p class="m-3 h4" id="people"></p>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#infoPane').hide()
+        })
+    </script>
+    <script type="text/javascript">
+        const ROOT_PATH = "https://cdn.jsdelivr.net/gh/EthanGeekFan/EthanGeekFan.github.io@latest/"
+        let myGlobe = echarts.init(document.getElementById("main"))
+        $.get(ROOT_PATH + 'world.json', async function (map) {
+            echarts.registerMap("world", map)
+            let cvs = document.createElement('canvas')
+            let worldMap = echarts.init(cvs, null, {
+                width: 8192,
+                height: 4096
+            })
+            worldMap.setOption({
+                backgroundColor: 'rgba(18,18,26,0.1)',
+                geo: {
+                    type: 'map',
+                    map: 'world',
+                    left: 0,
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    boundingCoords: [
+                        [-180, 90],
+                        [180, -90]
+                    ],
+
+                    zoom: 0,
+                    roam: false,
+                    itemStyle: {
+                        borderColor: 'rgb(92, 89, 221)',
+                        normal: {
+                            areaColor: 'rgba(56,44,36,0.55)',
+                            borderColor: 'rgb(252,128,103)',
+                            borderWidth: 5
+                        },
+                        emphasis: {
+                            areaColor: 'rgb(252,128,103)'
+                        }
+                    },
+                    label: {
+                        fontSize: 0,
+                        formatter: function (params) {
+                            return ''
+                        }
+                    }
+                },
+
+            })
+            let option = {
+                globe: {
+                    baseTexture: worldMap,
+                    shading: 'lambert',
+                    environment: 'none',
+                    show: true,
+                    light: {
+                        ambient: {
+                            intensity: 1.0
+                        },
+                        main: {
+                            intensity: 0.5,
+                        }
+                    },
+                    viewControl: {
+                        autoRotate: true,
+                        autoRotateSpeed: 1,
+                        targetCoord: [100, 39.92],
+                        autoRotateAfterStill: 6,
+                    },
+                },
+                series: []
+            };
+            myGlobe.setOption(option);
+            let data = await $.getJSON(ROOT_PATH + 'data.json')
+            worldMap.on('mouseover', function (params) {
+                $('#infoPane').show()
+                $('#location').text(params.name)
+                if (data[params.name] !== undefined) {
+                    let detail = ""
+                    for (const school in data[params.name]) {
+                        detail += `${school}：${data[params.name][school].join('，')}</br>`
+                    }
+                    $('#people').html(detail)
+                }
+            })
+            worldMap.on('mouseout', function (params) {
+                $('#infoPane').hide()
+                $('#location').text("")
+                $('#people').html("")
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            let infoPane = document.getElementById('infoPane')
+            document.onmousemove = function (event) {
+                let left = event.clientX
+                let top = event.clientY
+                const offsetX = 20
+                const offsetY = 20
+                const borderWidth = 10
+                if (left + offsetX + infoPane.clientWidth + borderWidth < window.innerWidth) {
+                    if (top + offsetY + infoPane.clientHeight + borderWidth < window.innerHeight) {
+                        infoPane.style.left = left + offsetX + 'px';
+                        infoPane.style.top = top + offsetY + 'px';
+                    } else {
+                        infoPane.style.left = left + offsetX + 'px';
+                        infoPane.style.top = top - infoPane.clientHeight - offsetY + 'px';
+                    }
+
+                } else {
+                    if (top + offsetY + infoPane.clientHeight + borderWidth < window.innerHeight) {
+                        infoPane.style.left = left - infoPane.clientWidth - offsetX + 'px';
+                        infoPane.style.top = top + offsetY + 'px';
+                    } else {
+                        infoPane.style.left = left - infoPane.clientWidth - offsetX + 'px';
+                        infoPane.style.top = top - infoPane.clientHeight - offsetY + 'px';
+                    }
+
+                }
+
+            }
+        }
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</html>

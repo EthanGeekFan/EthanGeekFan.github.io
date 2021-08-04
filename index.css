@@ -1,0 +1,64 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: ONEDAY, future, sans-serif;
+}
+
+.click-through {
+    pointer-events: none;
+}
+
+.click {
+    pointer-events: all;
+}
+
+#background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+}
+
+.ui {
+    position: absolute;
+    z-index: 10;
+}
+
+.panel {
+    width: 100px;
+    height: 200px;
+    pointer-events: none;
+    background-color: white;
+}
+
+#infoPane {
+    width: 300px;
+    /*height: 150px;*/
+    position: absolute;
+    background-color: rgba(194, 113, 56, 0.4);
+    pointer-events: none;
+    border-radius: 0 20px 0 20px;
+    color: rgb(255, 255, 255);
+    box-shadow: 0 0 25px rgba(252, 128, 103, 0.8);
+    border: 4px solid rgb(255, 141, 91);
+}
+
+@font-face {
+    font-family: future;
+    src: url("https://cdn.jsdelivr.net/gh/EthanGeekFan/EthanGeekFan.github.io@latest/fonts/future.ttf");
+}
+
+@font-face {
+    font-family: ONEDAY;
+    src: url("https://cdn.jsdelivr.net/gh/EthanGeekFan/EthanGeekFan.github.io@latest/fonts/ONEDAY.ttf");
+}
