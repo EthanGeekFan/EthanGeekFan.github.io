@@ -16,42 +16,56 @@ defaults:
       layout: "post"
 
 projects:
-  sort_by: pushed
+  sort_by: stars
   # sort_by options:
   #   - pushed
   #   - stars
-  limit: 9
+  limit: 10
   exclude:
     archived: false
     forks: true
     projects:
-    # - repo-name
+      # - repo-name
+      - CS107E_assignments
 
-# social_media:
-# behance: your_username
-# dribbble: your_username
-# facebook: your_username
-# hackerrank: your_username
-# instagram: your_username
-# keybase: your_username
-# linkedin: your_username
-# mastodon: your_username
-# medium: your_username
-# stackoverflow: your_user_id
-# telegram: your_username
-# twitter: your_username
-# unsplash: your_username
-# vk: your_username
-# website: http://your_website_url
-# youtube: your_username
+social_media:
+  # behance: your_username
+  # dribbble: your_username
+  # facebook: your_username
+  hackerrank: yangyifan529
+  # instagram: your_username
+  # keybase: your_username
+  linkedin: yifan-yang-ethan
+  # mastodon: your_username
+  # medium: your_username
+  # stackoverflow: your_user_id
+  # telegram: your_username
+  # twitter: your_username
+  # unsplash: your_username
+  # vk: your_username
+  # website: http://your_website_url
+  # youtube: your_username
 
 topics:
   - name: C++
     web_url: https://github.com/topics/cpp
     image_url: https://raw.githubusercontent.com/github/explore/180320cffc25f4ed1bbdfd33d4db3a66eeeeb358/topics/cpp/cpp.png
 
-  - name: Web design
+  - name: Rust
+    web_url: https://github.com/topics/rust
+    image_url: https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/rust/rust.png
 
-  - name: Sass
-    web_url: https://github.com/topics/sass
-    image_url: https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/sass/sass.png
+  - name: Docker
+    web_url: https://github.com/topics/docker
+    image_url: https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png
+
+  - name: JavaScript
+    web_url: https://github.com/topics/javascript
+    image_url: https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png
+
+  - name: Kubernetes
+    web_url: https://github.com/topics/kubernetes
+    image_url: https://raw.githubusercontent.com/github/explore/01ea2a586e5da744792d0ccfce2f68b861f29301/topics/kubernetes/kubernetes.png
+
+  - name: Machine Learning
+    web_url: https://github.com/topics/machine-learning
